@@ -1,0 +1,102 @@
+.list-product {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 200px; /* Minimum height to avoid collapsing */
+    margin: 30px;
+    border-radius: 6px;
+    background: white;
+    overflow-y: auto; /* Enable vertical scroll if needed */
+  }
+  
+  .listproduct-format-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%; /* Ensure full width */
+  }
+  
+  .listproduct-allproducts {
+    margin-top: 10px;
+    width: 100%;
+    max-height: 400px; /* Set maximum height for scrollbar */
+    overflow-y: auto; /* Enable vertical scrollbar */
+  }
+  
+  
+  .listproduct-format-main p {
+    text-align: center;
+    flex: 1; /* Equal width for all columns */
+  }
+  
+  .listproduct-product-icon {
+    width: 50px;
+    height: 50px;
+    margin-left: 70px;
+  }
+  
+  .listproduct-remove-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 80px;
+  }
+  
+  .listproduct-format {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%; /* Ensure full width */
+  }
+  
+  .listproduct-format p {
+    text-align: center;
+    flex: 1; /* Equal width for all columns */
+    margin-left: 100px;
+  }
+  .oldprice{
+    margin-left: -100px;
+  }
+  .newprice{
+    margin-left: -100px;
+  }
+
+  .cat{
+    margin-right: 130px;
+  }
+  @media screen and (max-width: 800px) {
+    .list-product{
+        width: 330px;
+        margin-left: 20px;  
+    }
+    .listproduct-format-main {
+      flex-direction: column; /* Adjust layout for small screens */
+      text-align: left; /* Align text to the left for small screens */
+    }
+  
+    .listproduct-format-main p {
+      flex: unset; /* Reset equal width for columns */
+      width: 1000px; /* Set width to 100% for full width */
+      margin: 5px 0; /* Adjust margin for better spacing */
+    }
+    .listproduct-product-icon {
+        margin-left: 0; /* Remove left margin for product icon */
+      }
+    
+      .listproduct-remove-icon {
+        margin-right: 0; /* Remove right margin for remove icon */
+      }
+    
+      .oldprice, .newprice, .cat {
+        text-align: left; /* Align text to the left for mobile view */
+        margin-left: 0; /* Remove margin for mobile view */
+      }
+  }
+  

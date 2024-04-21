@@ -1,0 +1,11 @@
+.admin {
+    display: flex;
+    width: 100%; /* Ensure the admin container spans the full width */
+}
+
+@media(max-width: 800px) {
+    .admin {
+        flex-direction: column;
+        width: 370px;
+    }
+}

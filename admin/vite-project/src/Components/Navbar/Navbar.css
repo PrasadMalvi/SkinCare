@@ -1,0 +1,47 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #684444;
+    color: white;
+    height: 70px;
+    padding: 0 20px;
+    font-size: 20px;
+    transition: background-color 0.3s ease-in-out;
+    z-index: 2;
+  }
+  
+  .nav-profile {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+  
+  .navlogo {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+  }
+  
+  .nav-name {
+    padding-left: 20px;
+    font-family: Brush Script MT;
+    font-size: 60px;
+    color: white; /* Ensure text color is white */
+    text-decoration: none;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .navbar {
+      font-size: 18px; /* Adjust font size for smaller screens */
+      
+    }
+  
+    .navlogo,
+    .nav-profile {
+      width: 25px; /* Adjust image size for smaller screens */
+      height: 25px;
+    }
+  }
+  

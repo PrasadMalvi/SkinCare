@@ -1,0 +1,44 @@
+/* Sidebar.css */
+
+.sidebar {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    max-width: 250px;
+    height: 100vh;
+    overflow-y: auto; /* Add vertical scroll for overflow content */
+  }
+  
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    background: #f6f6f6;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .add-icon {
+    width: 30px;
+    margin-right: 10px;
+  }
+  
+  .add-product {
+    font-size: 18px;
+  }
+  
+  /* Media query for 600px and below (for mobile devices) */
+  @media (max-width: 600px) {
+    .sidebar {
+      max-width: none;
+      height: auto;
+    }
+  
+    .sidebar-item {
+      margin-bottom: 10px;
+      margin-right: 50px;
+      margin-left: 50px;
+    }
+  }
+  
