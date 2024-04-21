@@ -1,0 +1,80 @@
+.shopcategory {
+    height: auto;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.shopcategory-banner {
+    display: block;
+    margin: 0 auto;
+    width: 90%; /* Adjust width for better responsiveness */
+    max-width: 400px; /* Limit maximum width for smaller screens */
+    height: auto;
+}
+
+.shopcategory-sort {
+    padding: 10px 20px;
+    border-radius: 40px;
+    border: 1px solid #888;
+    width: 5%; /* Adjust width for better responsiveness */
+    margin: 10px auto; /* Center horizontally and add margin from the top */
+    margin-left: 1400px;
+}
+.shopcategory-sort i{
+    margin-left: 10px;
+}
+
+.shopcategory p {
+    text-align: center; /* Center align paragraphs */
+    margin: 10px auto; /* Center horizontally and add margin */
+}
+
+.shopcategory-indexSort {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: center; /* Center items horizontally */
+    margin: 0 auto; /* Center horizontally */
+}
+
+.shopcategory-products {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjust spacing between items */
+}
+
+.shopcategory-products .item-box {
+    flex: 0 0 calc(45% - 20px); /* Adjust width for each product box */
+    margin-bottom: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .shopcategory-banner {
+        width: 100%; /* Take up full width on smaller screens */
+        max-width: none; /* Remove maximum width restriction */
+    }
+
+    .shopcategory-sort {
+        width: 20%; /* Adjust width for better responsiveness */
+        margin: 10px auto; /* Center horizontally and add margin from the top */
+    }
+    .shopcategory-sort i{
+        margin-left: 15px;
+    }
+
+    .shopcategory p {
+        margin-right: 0; /* Remove right margin */
+    }
+
+    .shopcategory-indexSort {
+        margin: 0 auto; /* Center horizontally */
+    }
+
+    .shopcategory-products .item-box {
+        flex: 0 0 calc(100% - 20px); /* Take up full width */
+    }
+    .shopcategory-products{
+        width: 95%;
+    }
+}

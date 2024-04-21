@@ -1,0 +1,80 @@
+/* Common styles for all screen sizes */
+p {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-top: 50px;
+}
+
+.best_selle-para {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.best_seller-section {
+  margin-top: -50px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: white;
+}
+/* Media query for mobile devices */
+@media screen and (max-width: 480px) {
+  .best_seller-section {
+    flex-direction: column; /* Change to column layout for smaller screens */
+    align-items: center; /* Center items in the column */
+  }
+
+  .box {
+    width: 100%; /* Make boxes take the full width in mobile view */
+    margin: 20px 0; /* Adjust margin for spacing between boxes */
+  }
+}
+/* Common styles for all screen sizes */
+p {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-top: 50px;
+}
+
+.best-seller {
+  text-align: center;
+}
+
+.best_selle-para {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.best_seller-section {
+  margin-top: -50px;
+  margin-bottom: 100px;
+  justify-content: space-around;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.idxbtn{
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.idxbtn:hover{
+  background-color: black;
+  color: white;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 480px) {
+  .best_seller-section {
+    flex-direction: column; /* Change to column layout for smaller screens */
+    align-items: center; /* Center items in the column */
+  }
+}

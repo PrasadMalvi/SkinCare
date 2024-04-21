@@ -1,0 +1,134 @@
+  .navbar {
+      background-color: #684444;
+      height: 70px;
+      width: 100%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      position: fixed;
+      transition: background-color 0.3s ease-in-out;
+      z-index: 2;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+      text-align: center;
+    }
+    .login{
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+    }
+    .login h3 {
+      cursor: pointer; /* Add pointer cursor to logout button */
+      margin-top: 20px;
+    }
+    .user-login{
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      display: flex;
+    }
+    .user-login h3{
+      margin-top: 20px;
+    }
+  img
+  {
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .nav-cart{
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+  }
+    .scrolled {
+      top: 0;
+      background-color: #684444; /* Adjust the background color for the scrolled state */
+      animation: fadeInDown 0.3s ease-in-out; /* Optional: add a fade-in animation */
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: 30px;
+      right: 143px; /* Adjusted for logged out state */
+      background-color: transparent;
+      color: white;
+      font-size: 12px;
+      width: 13px;
+      height: 15px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    
+    /* Adjust position for logged in state */
+    .logout{
+      margin-right: 30px;
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .nav-name, .nav-list {
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-name {
+      padding-left: 20px;
+      font-family: Brush Script MT;
+      font-size: 60px;
+    }
+    
+    .nav-list {
+      list-style: none;
+    }
+    
+    .nav-list li, .nav-list a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .nav-list {
+        display: none; /* Hide the navigation list by default on small screens */
+      }
+    
+      .login,
+      .user-login {
+        display: none; /* Hide login/logout section by default on small screens */
+      }
+    
+      .nav-name {
+        padding-left: 10px; /* Adjust padding for smaller screens */
+        font-size: 20px; /* Reduce font size for smaller screens */
+      }
+    
+      .navbar {
+        justify-content: space-around; /* Adjust spacing for smaller screens */
+      }
+    
+      /* Show navigation list and login/logout section when navbar is clicked */
+      .navbar.active .nav-list,
+      .navbar.active .login,
+      .navbar.active .user-login {
+        display: flex;
+      }
+    }
+    
+    

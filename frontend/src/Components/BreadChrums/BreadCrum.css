@@ -1,0 +1,22 @@
+.breadchrum-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-left: 20px; /* Adjust left margin for better spacing on smaller screens */
+}
+
+.bread-img {
+  background: transparent;
+  height: 20px;
+  width: 25px;
+  margin-left: 5px; /* Adjust margin to separate the arrow from text */
+  margin-top: 10px; /* Adjust top margin for better alignment */
+}
+
+.nav-home {
+  color: black;
+}
+
+p {
+  font-size: 16px; /* Decrease font size for better readability on smaller screens */
+  margin-top: 10px; /* Adjust top margin for better spacing */
+}

@@ -1,0 +1,62 @@
+/* For paragraphs */
+p {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* For images inside .item-box */
+.item-box img {
+  width: 100%; /* Adjust image width to fill container */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for images inside .item-box */
+.item-box img:hover {
+  transform: scale(1.3); /* Scale up the image on hover */
+}
+
+/* For the trending section */
+.trending-section {
+  margin-top: 30px; /* Reduce top margin */
+  text-align: center;
+}
+
+/* Adjust font size for the paragraph in the trending section */
+.best_seller-para {
+  font-size: 30px; /* Reduce font size */
+  margin-bottom: 50px; /* Reduce bottom margin */
+}
+
+/* Flexbox adjustments for the product grid */
+.trending-section-product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center items horizontally */
+  margin-top: -20px; /* Reduce top margin */
+  margin-bottom: 30px; /* Reduce bottom margin */
+  padding: 0 10px; /* Add padding to the sides */
+}
+
+/* Adjust styles for individual product boxes */
+.item-box {
+  width: 45%; /* Adjust width to fit two items per row */
+  margin: 10px; /* Add margin around each item */
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .best_seller-para {
+    font-size: 20px; /* Further reduce font size */
+    margin-bottom: 30px; /* Further reduce bottom margin */
+  }
+
+  .trending-section-product {
+    margin-top: -10px; /* Further reduce top margin */
+    margin-bottom: 20px; /* Further reduce bottom margin */
+  }
+
+  .item-box {
+    width: 100%; /* Full width on smaller screens */
+  }
+}

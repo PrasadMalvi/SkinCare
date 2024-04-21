@@ -1,0 +1,89 @@
+.item-container {
+  display: inline-block;
+  width: 23%; /* Adjust width to fit four items in a row */
+  margin: 1%; /* Adjust margin for spacing between items */
+  vertical-align: top; /* Align items to the top of the container */
+}
+.nav-box{
+  text-decoration: none;
+  color: inherit;
+}
+
+.box {
+  height: 300px;
+  width: 100%; /* Ensure the box takes the full width of its container */
+  background-color: white;
+  padding: 20px 0px 15px;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 5px solid transparent; /* Add a transparent border */
+}
+
+.box:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: transparent; /* Maintain the transparent border on hover */
+}
+
+.box-det {
+  width: 100%; /* Take the full width of the box */
+  margin-top: 10px; /* Add some top margin for spacing */
+}
+
+.box-img {
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 2%; /* Make the image round */
+}
+
+.item-prices {
+  display: flex;
+  justify-content: space-between; /* Separate the prices */
+}
+
+.button1 {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.button1:hover {
+  background-color: black;
+  color: white;
+}
+.box-detline{
+  text-decoration: line-through;
+  color: #888;
+}
+.prices {
+  display: inline;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust alignment */
+}
+
+
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .item-container {
+    width: 48%; /* Adjust width to fit two items in a row */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .item-container {
+    width: 100%; /* Make boxes take the full width in mobile view */
+    margin: 20px auto; /* Adjust margin for spacing between boxes */
+  }
+}

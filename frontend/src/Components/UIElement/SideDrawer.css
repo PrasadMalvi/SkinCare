@@ -1,0 +1,67 @@
+/* SideDrawer.css */
+
+.sidedrawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #684444;
+    color: white;
+    padding-top: 70px; /* Adjust padding to avoid overlapping with the navbar */
+    transition: transform 0.3s ease-out;
+    z-index: 3;
+  }
+  
+  .nav-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    margin-bottom: 15px;
+  }
+  
+  .nav-list a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+  }
+  
+  .login {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .user-login h3 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .user-img {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: #ff4d4d; /* Adjust color as needed */
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

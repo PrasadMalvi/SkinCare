@@ -1,0 +1,15 @@
+.cart-button{
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    height: 40px;
+    width: 350px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-button:hover{
+    background-color: rgb(58, 50, 50);
+    color: black;
+}

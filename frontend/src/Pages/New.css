@@ -1,0 +1,50 @@
+/* Paragraph styles */
+p {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  /* Style for the heading in the new collection section */
+  .newcollection h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the new collection section */
+  .newcollection {
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+    max-width: 90%; /* Limit maximum width */
+    margin-top: 100px; /* Adjust top margin */
+  }
+  
+  /* Styles for the shop category banners */
+  .shopcategory-banner {
+    display: block;
+    margin: 0 auto; /* Center horizontally */
+    width: 100%; /* Full width */
+    height: auto; /* Auto height */
+    max-width: 100%; /* Ensure maximum width */
+    margin-bottom: 30px; /* Adjust bottom margin */
+  }
+  
+  /* Flexbox adjustments for collections */
+  .collections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px; /* Adjust gap between items */
+  }
+  
+  /* Media query for smaller screens */
+  @media screen and (max-width: 768px) {
+    /* Adjust collections layout for smaller screens */
+    .collections {
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+    }
+    .newcollection{
+        margin-top: 100px;
+    }
+  }
+  

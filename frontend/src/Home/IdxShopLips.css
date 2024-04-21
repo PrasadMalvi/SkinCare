@@ -1,0 +1,84 @@
+/* Default styles for larger screens */
+.lips-section {
+  height: 700px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+}
+
+.lips-para {
+  font-size: larger;
+  background-color: black;
+  color: white;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.lips-text1 {
+  font-family: 'Brush Script MT';
+}
+
+.lips-text {
+  font-size: 90px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.lips-topi {
+  z-index: 1;
+  background-color: black;
+  height: 80%;
+  width: 50%;
+  margin-top: 5%;
+  margin-left: -100px;
+  overflow: hidden;
+}
+
+.lips-img {
+  height: 490px;
+  width: 760px;
+  transition: transform 0.5s ease-in-out;
+}
+.button2{
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  height: 40px;
+  width: 150px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.button2:hover{
+  background-color: white;
+  color: black;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 768px) {
+  .lips-section {
+    flex-direction: column; /* Stack elements vertically for smaller screens */
+  }
+
+  .lips-para {
+    width: 100%;
+  }
+
+  .lips-topi {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .lips-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,17 @@
+.card {
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(219, 216, 216, 0.26);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow: hidden;
+  background: black;
+  color: white;
+}
+
+/* Media query for responsiveness */
+@media only screen and (max-width: 600px) {
+  .card {
+    padding: 0.5rem; /* Adjusted padding for smaller screens */
+    border-radius: 4px; /* Adjusted border radius for smaller screens */
+  }
+}

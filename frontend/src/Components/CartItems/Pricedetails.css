@@ -1,0 +1,65 @@
+.cart-total-right {
+    height: auto; /* Adjust height to auto for content flexibility */
+    width: 100%; /* Full width for responsiveness */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px; /* Add padding for spacing */
+  }
+  
+  .cart-total-right h1 {
+    font-size: 20px; /* Decrease font size for smaller screens */
+    margin-bottom: 15px; /* Adjust margin */
+    text-align: center;
+  }
+  
+  .cart-total-right h3 {
+    font-size: 16px; /* Decrease font size for smaller screens */
+    margin-bottom: 8px; /* Adjust margin */
+  }
+  
+  .cart-total-right h2 {
+    font-size: 20px; /* Decrease font size for smaller screens */
+    margin-top: 15px; /* Adjust margin */
+    margin-bottom: 8px; /* Adjust margin */
+  }
+  
+  .cart-total-right h3:last-child {
+    margin-bottom: 15px; /* Adjust margin */
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .cart-total-right {
+      padding: 15px; /* Adjust padding */
+      width: 88%;
+      margin-left: 5px;
+    }
+  
+    .cart-total-right h1 {
+      font-size: 18px; /* Further decrease font size */
+      margin-bottom: 12px; /* Further adjust margin */
+    }
+  
+    .cart-total-right h3 {
+      font-size: 14px; /* Further decrease font size */
+      margin-bottom: 6px; /* Further adjust margin */
+    }
+  
+    .cart-total-right h2 {
+      font-size: 18px; /* Further decrease font size */
+      margin-top: 12px; /* Further adjust margin */
+      margin-bottom: 6px; /* Further adjust margin */
+    }
+  
+    .cart-total-right h3:last-child {
+      margin-bottom: 12px; /* Further adjust margin */
+    }
+  
+    .cart-total-right {
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+    }
+  }
+  

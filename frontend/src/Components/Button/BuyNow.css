@@ -1,0 +1,15 @@
+.buy-button{
+    background-color: #542c2c ;
+    border: 1px solid black;
+    color: balck;
+    height: 40px;
+    width: 350px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.buy-button:hover{
+    background-color: #74545c ;
+    color: white;
+}

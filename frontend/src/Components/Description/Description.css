@@ -1,0 +1,53 @@
+/* Description.css */
+
+/* Default styles */
+.description {
+    margin: 120px 170px;
+}
+
+.description-navigator {
+    display: flex;
+    flex-wrap: wrap; /* Allow navigation boxes to wrap to the next line */
+}
+
+.description-nav-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    width: 171px; /* Adjust width as needed */
+    height: 70px; /* Adjust height as needed */
+    border: 1px solid #d0d0d0;
+    margin-bottom: 10px; /* Add margin between navigation boxes */
+}
+
+.description-nav-box.fade {
+    background: #FBFBFB;
+    color: #555;
+}
+
+.descriptionbox-description {
+    width: 100%; /* Ensure description box spans full width */
+    padding: 48px; /* Add padding for content inside the description box */
+    border: 1px solid #d0d0d0;
+    padding-bottom: 70px; /* Adjust bottom padding to prevent overlap with navigation */
+    background-color: #FFFFFF; /* Ensure a white background for content */
+    overflow: auto; /* Enable scrolling if content overflows */
+}
+
+/* Adjustments for mobile and smaller screens */
+@media (max-width: 768px) {
+    .description {
+        margin: 60px 20px; /* Adjust margin for mobile screens */
+    }
+
+    .description-nav-box {
+        width: calc(33.33% - 20px); /* Adjust width for mobile screens */
+        margin-right: 10px; /* Add margin between navigation boxes */
+    }
+
+    .descriptionbox-description {
+        padding: 20px; /* Adjust padding for content inside the description box */
+    }
+}

@@ -1,0 +1,59 @@
+.relatedproduct {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 91vh;
+  }
+  
+  .relatedproduct h1 {
+    color: #171717;
+    font-size: 50px;
+    font-weight: 600;
+  }
+  
+  .relatedproduct-items {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scrollbar-width: none; /* Hide scrollbar */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    max-width: 100%; /* Limit maximum width */
+    padding-bottom: 10px; /* Add some bottom padding to accommodate scrollbar */
+  }
+  
+  .relatedproduct-items::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Webkit browsers */
+  }
+  
+  .item {
+    /* Add styling for each individual item */
+    width: 250px; /* Adjust width as needed */
+    height: auto; /* Allow height to adjust according to content */
+  }
+  
+  
+  
+  .scroll-arrows {
+    margin-top: 10px;
+  }
+  
+  .scroll-arrow {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .scroll-arrow:focus {
+    outline: none; /* Remove focus outline */
+  }
+  
+  .scroll-arrow.left {
+    margin-right: 10px;
+  }
+  
+  .scroll-arrow.right {
+    margin-left: 10px;
+  }
+  

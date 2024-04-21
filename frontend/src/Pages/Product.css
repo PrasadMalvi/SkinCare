@@ -1,0 +1,15 @@
+.product_container {
+    width: 100%;
+    max-width: 90%; /* Adjust max-width as needed for better responsiveness */
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 50px; /* Adjust top margin for better spacing */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .product_container {
+        margin-top: 70px; /* Adjust top margin for better spacing on smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}

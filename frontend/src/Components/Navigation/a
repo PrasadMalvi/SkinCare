@@ -1,0 +1,61 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import './Navbar.css';
+import { Context } from '../../Context/Context';
+import Backdrop from '../UIElement/Backdrop';
+
+const Navbar = () => {
+  const {getTotalCartItems} = useContext(Context);
+  const [scrolled, setScrolled] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(false);
+
+  const navigate = useNavigate(); // Get the navigate function
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Use the navigate function to go to the specified path
+  const navigateTo = (path) => {
+    navigate(path);
+  };
+
+  const toggleNavbar = () => {
+    setShowNavbar(prevState => !prevState);
+  };
+
+  return (
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <Backdrop />
+      <div className='nav-name'><NavLink to='/' exact="true"  onClick={() =>navigateTo('/')}>Glownius</NavLink></div>
+      <ul className='nav-list'>
+        {/* Use the navigate function when the link is clicked */}
+        <li><NavLink to='/shopall' exact="true" onClick={() => navigateTo('/shopall')}>SHOP ALL</NavLink></li>
+        <li><NavLink to='/new' exact="true" onClick={() => navigateTo('/new')}>NEW</NavLink></li>
+        <li><NavLink to='/bestseller' exact="true" onClick={() => navigateTo('/bestseller')}>BEST SELLER</NavLink></li>
+        <li><NavLink to='/face' exact="true" onClick={() => navigateTo('/face')}>FACE</NavLink></li>
+        <li><NavLink to='/lips' exact="true" onClick={() => navigateTo('/lips')}>LIPS</NavLink></li>
+        <li><NavLink to='/eye' exact="true" onClick={() => navigateTo('/eye')}>EYE</NavLink></li>      </ul>
+      <div className='login'>
+        <NavLink to='/login' exact="true" onClick={() => navigateTo('/login')}><div className='user-login'><img src={require('../Assets/user.png')} className='user-img' alt='login' /><h3>Login</h3></div></NavLink>
+        <NavLink to='/cartpage' exact="true" onClick={() => navigateTo('/cartpage')}><img src={require('../Assets/bag.png')} className='nav-cart' alt='login' />
+          <div className='cart-count'>{getTotalCartItems()}</div>
+        </NavLink>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
