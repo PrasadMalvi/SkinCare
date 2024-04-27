@@ -18,6 +18,8 @@ import banner_lips from './Components/Assets/lips.webp'
 import banner_shopall from './Components/Assets/shopall.webp'
 import banner_new from './Components/Assets/new.webp';
 import LoginSignup from './Pages/LoginSignup';
+import CheckoutPage from './Pages/CheckoutPage';
+import ProfilePage from './Pages/ProfilePage';
 
 function App() {
   return (
@@ -36,6 +38,9 @@ function App() {
         {/* <Route path='' element={<Product />} /> */}
         <Route path="/cartpage" element={<CartPage />} />
         <Route path="/login" element={<LoginSignup />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/profilepage" element={<ProfilePage />} />
+
 
       </Routes>
       <Footer />

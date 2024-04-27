@@ -1,23 +1,21 @@
 import React, { useContext } from 'react';
-import './CartItems.css'; // Import your CSS file for styling
+import './CartItems.css'; 
 import { Context } from '../../Context/Context';
 import Pricedetails from './Pricedetails';
 import empty_cart from '../Assets/empty-cart.webp';
 import { NavLink } from 'react-router-dom';
 
 const CartItems = () => {
-  const { allProducts, cartItems, updateCartItemQuantity } = useContext(Context);
+  const { allProducts, cartItems, addToCart, removeFromCart } = useContext(Context);
 
-  // ... your existing code for images and cartItemsImageList (if applicable)
-
-  const hasItemsInCart = Object.values(cartItems).some((quantity) => quantity > 0);
+  const hasItemsInCart = Object.values(cartItems).some(quantity => quantity > 0);
 
   return (
     <div className="cartitems">
       <div className="cartitems-left">
         {hasItemsInCart ? (
           <>
-            {allProducts.map((product) => {
+            {allProducts.map(product => {
               const quantity = cartItems[product.id];
               if (quantity > 0) {
                 return (
@@ -25,9 +23,9 @@ const CartItems = () => {
                     <div>
                       <img src={product.image} alt={product.name} className="cart-item-image" />
                       <div className="cart-item-quantity">
-                        <button onClick={() => updateCartItemQuantity(product.id, -1)}>-</button>
+                        <button onClick={() => removeFromCart(product.id)}>-</button>
                         <span>{quantity}</span>
-                        <button onClick={() => updateCartItemQuantity(product.id, 1)}>+</button>
+                        <button onClick={() => addToCart(product.id)}>+</button>
                       </div>
                     </div>
                     <div className="cart-item-details">
@@ -44,14 +42,14 @@ const CartItems = () => {
                   </div>
                 );
               }
-              return null; // Filter out empty products
+              return null;
             })}
 
-            <button type="button" className="cart-buy-button">PROCEED TO CHECKOUT</button>
+            <NavLink to='/checkout'><button type="button" className="cart-buy-button">PROCEED TO CHECKOUT</button></NavLink>
           </>
         ) : (
           <div className="cart-empty">
-            <img src={empty_cart} alt="" className="empty-cart-image"></img>
+            <img src={empty_cart} alt="" className="empty-cart-image" />
             <p>Your cart is currently empty.</p>
             <NavLink to="/">
               <button className="cart-explore">Explore the site to add to cart</button>

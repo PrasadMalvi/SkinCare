@@ -11,24 +11,38 @@ const ContextProvider = (props) => {
             .then((response) => response.json())
             .then((data) => {
                 setAllProducts(data);
-                setCartItems(getDefaultCart(data));
-
-                if(localStorage.getItem('auth-token'))
-                {
-                    fetch('http://localhost:4000/getdata',{
-                        method:'POST',
-                        headers:{
-                            Accept:'application/form-data',
-                            'auth-token':`${localStorage.getItem('auth-token')}`,
-                            'Content-Type':'application/json',
+                const defaultCart = getDefaultCart(data);
+                // Merge default cart with fetched cart data
+                setCartItems(prevCart => {
+                    const mergedCart = { ...prevCart };
+                    for (const itemId in defaultCart) {
+                        if (!(itemId in mergedCart)) {
+                            mergedCart[itemId] = defaultCart[itemId];
+                        }
+                    }
+                    return mergedCart;
+                });
+    
+                if (localStorage.getItem('auth-token')) {
+                    fetch('http://localhost:4000/getdata', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/form-data',
+                            'auth-token': `${localStorage.getItem('auth-token')}`,
+                            'Content-Type': 'application/json',
                         },
-                        body:"",
-                    }).then((response)=>response.json())
-                    .then((data)=>setCartItems(data));
+                        body: "",
+                    }).then((response) => response.json())
+                        .then((data) => {
+                            // Merge fetched cart data with default cart
+                            const mergedCart = { ...defaultCart, ...data };
+                            setCartItems(mergedCart);
+                        });
                 }
             })
             .catch(error => console.error('Error fetching products:', error));
     }, []);
+    
 
     const addToCart = (itemId) => {
         setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -57,8 +71,6 @@ const ContextProvider = (props) => {
         return cart;
     }
 
-  
-
     const removeFromCart = (itemId) => {
         setCartItems(prev => ({ ...prev, [itemId]: Math.max(prev[itemId] - 1, 0) }));
     
@@ -84,11 +96,42 @@ const ContextProvider = (props) => {
         }
     }
     
-    
-    
-    const updateCartItemQuantity = (itemId, quantity) => {
-        setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] + quantity }));
-    }
+    const checkoutHandle = async (formData) => {
+        try {
+          // Ensure that the formData object is properly structured
+          // and contains all required fields before sending it to the server
+          // Send form data to backend endpoint for processing
+          const response = await fetch('http://localhost:4000/placeorder', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'auth-token': localStorage.getItem('auth-token') // Include the authentication token in the request headers
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          const data = await response.json();
+          if (response.ok) {
+            // Handle successful response from backend
+            console.log('Order placed successfully:', data);
+            alert('Order placed successfully!');
+            
+            // Redirect to the home page after a short delay (e.g., 1 second)
+            setTimeout(() => {
+                window.location.href = '/'; // Replace '/home' with the actual URL of your home page
+            }, 1000);
+          } else {
+            // Handle error response from backend
+            console.error('Failed to place order:', data.error);
+            alert('Failed to place order. Please try again.');
+          }
+        } catch (error) {
+          // Handle network errors
+          console.error('Error placing order:', error);
+          alert('Failed to place order. Please try again later.');
+        }
+      };
+      
 
     const getTotalCartItems = () => {
         let totalItem = 0;
@@ -100,7 +143,7 @@ const ContextProvider = (props) => {
         return totalItem;
     }
 
-    const contextValue = { getTotalCartItems, allProducts, cartItems, addToCart, removeFromCart, updateCartItemQuantity };
+    const contextValue = { getTotalCartItems, allProducts, cartItems, addToCart, removeFromCart, checkoutHandle };
 
     return (
         <Context.Provider value={contextValue}>

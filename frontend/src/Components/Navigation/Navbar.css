@@ -20,6 +20,11 @@
       display: flex;
       align-items: center;
     }
+    .logged-in{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
     .login h3 {
       cursor: pointer; /* Add pointer cursor to logout button */
       margin-top: 20px;
@@ -64,12 +69,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      
     }
     
     /* Adjust position for logged in state */
-    .logout{
-      margin-right: 30px;
+   .cart-count {
+      right: 140px;
+    }
+
+    .cart-count2{
+      margin-right: 16px;
     }
     
     @keyframes fadeInDown {
@@ -103,32 +111,4 @@
       text-decoration: none;
       color: white;
     }
-
-    @media only screen and (max-width: 768px) {
-      .nav-list {
-        display: none; /* Hide the navigation list by default on small screens */
-      }
-    
-      .login,
-      .user-login {
-        display: none; /* Hide login/logout section by default on small screens */
-      }
-    
-      .nav-name {
-        padding-left: 10px; /* Adjust padding for smaller screens */
-        font-size: 20px; /* Reduce font size for smaller screens */
-      }
-    
-      .navbar {
-        justify-content: space-around; /* Adjust spacing for smaller screens */
-      }
-    
-      /* Show navigation list and login/logout section when navbar is clicked */
-      .navbar.active .nav-list,
-      .navbar.active .login,
-      .navbar.active .user-login {
-        display: flex;
-      }
-    }
-    
     

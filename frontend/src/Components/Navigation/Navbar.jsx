@@ -82,19 +82,26 @@ const Navbar = () => {
       </ul>
       <div className='login'>
         {localStorage.getItem('auth-token') ? (
-          <h3 onClick={logout} className='logout'>Logout</h3>
-        ) : (
-          <NavLink to='/login' onClick={() => navigateTo('/login')}>
-            <div className='user-login'>
-              <img src={require('../Assets/user.png')} className='user-img' alt='login' />
-              <h3>Login</h3>
-            </div>
-          </NavLink>
-        )}
-        <NavLink to='/cartpage' onClick={() => navigateTo('/cartpage')}>
+          <div className="logged-in">
+            <h3 onClick={logout}>Logout</h3>
+            <NavLink to='/profilepage' onClick={() => navigateTo('/profilepage')}><img src={require('../Assets/user.png')} className='user-img' alt='login' /></NavLink>
+            <NavLink to='/cartpage' onClick={() => navigateTo('/cartpage')}>
           <img src={require('../Assets/bag.png')} className='nav-cart' alt='login' />
           <div className='cart-count'>{getTotalCartItems()}</div>
         </NavLink>
+          </div>
+        ) : (
+          <NavLink to='/login' onClick={() => navigateTo('/login')}>
+            <div className='user-login'>
+              <h3>Login</h3>
+              <NavLink to='/cartpage' onClick={() => navigateTo('/cartpage')}>
+          <img src={require('../Assets/bag.png')} className='nav-cart' alt='login' />
+          <div className='cart-count cart-count2'>{getTotalCartItems()}</div>
+        </NavLink>
+            </div>
+          </NavLink>
+        )}
+        
       </div>
     </nav>
   );
