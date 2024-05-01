@@ -33,7 +33,7 @@ const Pricedetails = ({ allProducts, cartItems }) => {
         <h1>Price Details</h1>
       </div>
 
-      <h3>Price ({itemCount} items): ₹ {totalPrice}</h3>
+      <h3>Price ({itemCount} item's): ₹ {totalPrice}</h3>
       <hr />
       {totalSavings > 0 && (
         <h3>Discount: ₹ {totalSavings}</h3>

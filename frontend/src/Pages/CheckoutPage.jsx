@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './CheckoutPage.css';
-import { Context } from '../Context/Context';
 
 const CheckoutPage = () => {
-  const { checkoutHandle } = useContext(Context);
   const [formData, setFormData] = useState({
     fullName: '',
     addressLine1: '',
@@ -21,30 +19,24 @@ const CheckoutPage = () => {
   };
 
   const handleSubmit = async (event) => {
-    // Prevent the default form submission behavior
     event.preventDefault();
-  
-    // Validate the form data
-    if (
-      formData.fullName.trim() === '' ||
-      formData.addressLine1.trim() === '' ||
-      formData.city.trim() === '' ||
-      formData.state.trim() === '' ||
-      formData.postalCode.trim() === '' ||
-      formData.country.trim() === ''
-    ) {
-      alert('Please fill out all required fields.');
-      return;
-    }
-  
+
     try {
-      // Call the checkoutHandle function from the context
-      const response = await checkoutHandle(formData);
+      const response = await fetch('http://localhost:4000/placeorder', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'auth-token': localStorage.getItem('auth-token'),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       
-      // Check if the order placement was successful
-      if (response && response.success) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         alert('Order placed successfully!');
-        // Optionally, redirect the user to a confirmation page or do other actions
+        // Optionally, redirect the user to a confirmation page or perform other actions
       } else {
         alert('Failed to place order. Please try again later.');
       }
@@ -54,15 +46,12 @@ const CheckoutPage = () => {
     }
   };
   
-  
-
   return (
     <div className="checkout-container">
       <h1>Checkout Page</h1>
       <form onSubmit={handleSubmit} className="checkout-form">
         <label htmlFor="fullName">Full Name:</label>
         <input
-          className='check-lab'
           type="text"
           id="fullName"
           name="fullName"
@@ -73,7 +62,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="addressLine1">Address Line 1:</label>
         <input
-          className='check-lab'
           type="text"
           id="addressLine1"
           name="addressLine1"
@@ -84,7 +72,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="addressLine2">Address Line 2:</label>
         <input
-          className='check-lab'
           type="text"
           id="addressLine2"
           name="addressLine2"
@@ -94,7 +81,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="city">City:</label>
         <input
-          className='check-lab'
           type="text"
           id="city"
           name="city"
@@ -105,7 +91,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="state">State:</label>
         <input
-          className='check-lab'
           type="text"
           id="state"
           name="state"
@@ -116,7 +101,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="postalCode">Postal Code:</label>
         <input
-          className='check-lab'
           type="text"
           id="postalCode"
           name="postalCode"
@@ -127,7 +111,6 @@ const CheckoutPage = () => {
 
         <label htmlFor="country">Country:</label>
         <input
-          className='check-lab'
           type="text"
           id="country"
           name="country"

@@ -96,7 +96,7 @@ const ContextProvider = (props) => {
         }
     }
     
-    const checkoutHandle = async (formData) => {
+    /* const checkoutHandle = async (formData, itemId) => {
         try {
           // Ensure that the formData object is properly structured
           // and contains all required fields before sending it to the server
@@ -130,7 +130,7 @@ const ContextProvider = (props) => {
           console.error('Error placing order:', error);
           alert('Failed to place order. Please try again later.');
         }
-      };
+      }; */
       
 
     const getTotalCartItems = () => {
@@ -143,7 +143,7 @@ const ContextProvider = (props) => {
         return totalItem;
     }
 
-    const contextValue = { getTotalCartItems, allProducts, cartItems, addToCart, removeFromCart, checkoutHandle };
+    const contextValue = { getTotalCartItems, allProducts, cartItems, addToCart, removeFromCart };
 
     return (
         <Context.Provider value={contextValue}>
