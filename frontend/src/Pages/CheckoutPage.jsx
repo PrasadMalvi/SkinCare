@@ -1,140 +1,77 @@
 import React, { useState } from 'react';
-import './CheckoutPage.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const CheckoutPage = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    state: '',
-    postalCode: '',
-    country: '',
-    paymentMethod: 'cash',
-  });
+  const navigate = useNavigate(); 
+    const [fullName, setFullName] = useState('');
+    const [addressLine1, setAddressLine1] = useState('');
+    const [addressLine2, setAddressLine2] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [postalCode, setPostalCode] = useState('');
+    const [country, setCountry] = useState('');
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const handlePlaceOrder = async () => {
+        try {
+            // Validate required fields
+            if (!fullName || !addressLine1 || !city || !state || !postalCode || !country) {
+                console.error("Please fill in all required fields");
+                return;
+            }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+            // Send order data to backend
+            const response = await fetch('http://localhost:4000/placeorder', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/form-data',
+                    'Content-Type': 'application/json',
+                    'auth-token': `${localStorage.getItem('auth-token')}`, // Include user token for authentication
+                },
+                body: JSON.stringify({
+                    fullName,
+                    addressLine1,
+                    addressLine2,
+                    city,
+                    state,
+                    postalCode,
+                    country
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                // Order placed successfully
+                console.log("Order placed successfully1");
+                navigate('/');
+            } else {
+                // Error placing order
+                console.error("Error placing order:", data.error);
+            }
+        } catch (error) {
+            console.error("Error placing order:", error);
+        }
+    };
 
-    try {
-      const response = await fetch('http://localhost:4000/placeorder', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'auth-token': localStorage.getItem('auth-token'),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        alert('Order placed successfully!');
-        // Optionally, redirect the user to a confirmation page or perform other actions
-      } else {
-        alert('Failed to place order. Please try again later.');
-      }
-    } catch (error) {
-      console.error('Error placing order:', error);
-      alert('Failed to place order. Please try again later.');
-    }
-  };
-  
-  return (
-    <div className="checkout-container">
-      <h1>Checkout Page</h1>
-      <form onSubmit={handleSubmit} className="checkout-form">
-        <label htmlFor="fullName">Full Name:</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="addressLine1">Address Line 1:</label>
-        <input
-          type="text"
-          id="addressLine1"
-          name="addressLine1"
-          value={formData.addressLine1}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="addressLine2">Address Line 2:</label>
-        <input
-          type="text"
-          id="addressLine2"
-          name="addressLine2"
-          value={formData.addressLine2}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="city">City:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="state">State:</label>
-        <input
-          type="text"
-          id="state"
-          name="state"
-          value={formData.state}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="postalCode">Postal Code:</label>
-        <input
-          type="text"
-          id="postalCode"
-          name="postalCode"
-          value={formData.postalCode}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="country">Country:</label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="paymentMethod">Payment Method:</label>
-        <select
-          id="paymentMethod"
-          name="paymentMethod"
-          value={formData.paymentMethod}
-          onChange={handleChange}
-          required
-        >
-          <option value="cash">Cash on Delivery</option>
-          {/* Add other payment methods if applicable */}
-        </select>
-
-        <button type="submit" className="place-order-button">Place Order</button>
-      </form>
-    </div>
-  );
+    return (
+        <div>
+            <h2>Checkout Page</h2>
+            <label>Full Name:</label>
+            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} /><br />
+            <label>Address Line 1:</label>
+            <input type="text" value={addressLine1} onChange={(e) => setAddressLine1(e.target.value)} /><br />
+            <label>Address Line 2:</label>
+            <input type="text" value={addressLine2} onChange={(e) => setAddressLine2(e.target.value)} /><br />
+            <label>City:</label>
+            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} /><br />
+            <label>State:</label>
+            <input type="text" value={state} onChange={(e) => setState(e.target.value)} /><br />
+            <label>Postal Code:</label>
+            <input type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} /><br />
+            <label>Country:</label>
+            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} /><br />
+            <button onClick={handlePlaceOrder}>Place Order</button>
+        </div>
+    );
 };
 
 export default CheckoutPage;

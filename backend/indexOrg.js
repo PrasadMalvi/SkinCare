@@ -182,8 +182,11 @@ app.post('/signup', async (req, res) => {
         // Hash the password before saving it to the database
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        // Create cart data for the user with only the product that has been added
+        // Create cart data for the user
         const cart = {};
+        for (let i = 0; i < 300; i++) {
+            cart[i] = 0;
+        }
 
         // Create a new user instance
         const newUser = new Users({
@@ -311,7 +314,7 @@ app.post('/getdata',fetchUser,async(req,res)=>{
 })
 
 // Schema for storing order details
-const MyOrder = mongoose.model("MyOrder", {
+const OrderDetails = mongoose.model("OrderDetails", {
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -348,16 +351,30 @@ const MyOrder = mongoose.model("MyOrder", {
         enum: ["cash"], // Only allow cash payment method
         required: true,
     },
-    orderedProducts: {
-        type: Object,
-    },
+    orderedProducts: [{
+        productId: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Product' // Reference to the Product model
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        quantity: {
+            type: Number,
+            required: true,
+        },
+        price: {
+            type: Number,
+            required: true,
+        }
+    }],
     createdAt: {
         type: Date,
         default: Date.now,
     }
 });
-
-// Endpoint for placing orders
 // Endpoint for placing orders
 app.post('/placeorder', fetchUser, async (req, res) => {
     try {
@@ -370,18 +387,34 @@ app.post('/placeorder', fetchUser, async (req, res) => {
 
         // Retrieve user's cart data
         const userData = await Users.findOne({ _id: req.user.id });
-        console.log(userData.cartData)
-        const orderedProducts = Object.entries(userData.cartData)
-            .filter(([productId, quantity]) => quantity === 1)
-            .reduce((acc, [productId]) => {
-                acc[productId] = 1; // Set quantity to 1 for each product
-                return acc;
-            }, {});
-        // Convert Object.entries to Array
-        
+
+        // Initialize an array to store ordered product details
+        let orderedProducts = [];
+
+        // Loop through each item in the user's cart
+        for (const [productId, quantity] of Object.entries(userData.cartData)) {
+            try {
+                // Find the product details by ID
+                const product = await Product.findById(productId);
+
+                // If the product is found, add its details to the ordered products array
+                if (product) {
+                    orderedProducts.push({
+                        productId: product._id, // Use ObjectId type
+                        name: product.name,
+                        quantity: quantity,
+                        price: product.new_price // Assuming new_price is the price to be used in the order
+                    });
+                } else {
+                    console.error(`Product with ID ${productId} not found`);
+                }
+            } catch (error) {
+                console.error(`Error fetching product with ID ${productId}:`, error);
+            }
+        }
 
         // Create new order instance
-        const order = new MyOrder({
+        const order = new OrderDetails({
             userId: req.user.id,
             fullName,
             addressLine1,
@@ -391,7 +424,8 @@ app.post('/placeorder', fetchUser, async (req, res) => {
             postalCode,
             country,
             paymentMethod: "cash", // Hardcoded to cash payment method
-            orderedProducts,
+            orderedProducts ,
+             // Assign orderedProducts to the correct field
             createdAt: new Date() // Adding the current date to the order
         });
 
@@ -408,23 +442,8 @@ app.post('/placeorder', fetchUser, async (req, res) => {
     }
 });
 
-// Endpoint to fetch order details for the logged-in user
-app.get('/orderhistory', fetchUser, async (req, res) => {
-    try {
-        // Fetch order history for the logged-in user
-        const orders = await MyOrder.find({ userId: req.user.id }).sort({ createdAt: -1 });
 
-        // Filter out orders with non-empty arrays of ordered products
-        const filteredOrders = orders.filter(order => Object.keys(order.orderedProducts).length > 0);
-        // Send filtered order history as a response
-        res.json({ success: true, orders: filteredOrders });
-    } catch (error) {
-        console.error("Error fetching order history:", error);
-        res.status(500).json({ success: false, error: "Failed to fetch order history" });
-    }
-});
 
- 
 
 app.listen(port, (error) => {
     if (!error) {

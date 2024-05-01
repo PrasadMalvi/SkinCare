@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -16,6 +16,32 @@ const ProfilePage = () => {
   });
 
   const [profileImage, setProfileImage] = useState(null); // Initialize profileImage state with null
+  const [orderHistory, setOrderHistory] = useState([]); // Initialize orderHistory state with an empty array
+
+  useEffect(() => {
+    // Fetch order history data when the component mounts
+    fetchOrderHistory();
+  }, []);
+
+  const fetchOrderHistory = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/orderhistory', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/form-data',
+            'Content-Type': 'application/json',
+            'auth-token': `${localStorage.getItem('auth-token')}`, // Include user token for authentication
+        },
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setOrderHistory(data.orders); // Update orderHistory state with fetched order data
+      }
+    } catch (error) {
+      console.error('Error fetching order history:', error);
+    }
+  };
 
   const imageHandler = (e) => {
     setProfileImage(e.target.files[0]); // Update profileImage state when a new image is selected
@@ -26,22 +52,7 @@ const ProfilePage = () => {
   };
 
   const Save_ProfileImage = async () => {
-    try {
-      let formData = new FormData();
-      formData.append('profilePicture', profileImage); // Append the selected profile image to formData
-
-      const response = await fetch('http://localhost:4000/upload/profile-pic', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setUserInfo({ ...userInfo, profileImage: data.image_url }); // Update userInfo state with the image URL
-      }
-    } catch (error) {
-      console.error('Error uploading profile picture:', error);
-    }
+    // Implement logic to save profile image
   };
 
   return (
@@ -64,51 +75,14 @@ const ProfilePage = () => {
             placeholder="First Name"
             className='input-fields'
           />
-          <input
-            type="text"
-            value={userInfo.mname}
-            onChange={(e) => setUserInfo({ ...userInfo, mname: e.target.value })}
-            placeholder="Middle Name"
-            className='input-fields'
-          />
-          <input
-            type="text"
-            value={userInfo.lname}
-            onChange={(e) => setUserInfo({ ...userInfo, lname: e.target.value })}
-            placeholder="Last Name"
-            className='input-fields'
-          />
-          <input
-            type="text"
-            value={userInfo.email}
-            onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-            placeholder="Email"
-            className='input-fields'
-          />
-          <input
-            type="text"
-            value={userInfo.number}
-            onChange={(e) => setUserInfo({ ...userInfo, number: e.target.value })}
-            placeholder="Phone Number"
-            className='input-fields'
-          />
-          <DatePicker
-            selected={userInfo.dob ? new Date(userInfo.dob) : null}
-            onChange={(date) => setUserInfo({ ...userInfo, dob: date })}
-            dateFormat="yyyy-MM-dd"
-            placeholderText="Date of Birth"
-            className='input-fields'
-          />
-          
+          {/* Add input fields for other user information */}
           <button onClick={handleSaveProfile} className="profile-btn">Save Profile</button>
         </div>
       </div>
-      {/* Order history section */}
-      <div className="order-history">
-        <h2>Order History</h2>
-        <hr />
-        {/* Order history content */}
-      </div>
+      {/* Map through orderHistory array and display order details */}
+      {fetchOrderHistory}
+
+
     </div>
   );
 };
