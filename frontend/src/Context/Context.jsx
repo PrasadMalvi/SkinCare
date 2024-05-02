@@ -8,11 +8,15 @@ const ContextProvider = (props) => {
 
     useEffect(() => {
         fetch('http://localhost:4000/allproducts')
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.json();
+            })
             .then((data) => {
                 setAllProducts(data);
                 const defaultCart = getDefaultCart(data);
-                // Merge default cart with fetched cart data
                 setCartItems(prevCart => {
                     const mergedCart = { ...prevCart };
                     for (const itemId in defaultCart) {
@@ -32,16 +36,22 @@ const ContextProvider = (props) => {
                             'Content-Type': 'application/json',
                         },
                         body: "",
-                    }).then((response) => response.json())
+                    }).then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok.');
+                        }
+                        return response.json();
+                    })
                         .then((data) => {
-                            // Merge fetched cart data with default cart
                             const mergedCart = { ...defaultCart, ...data };
                             setCartItems(mergedCart);
-                        });
+                        })
+                        .catch(error => console.error('Error fetching data:', error));
                 }
             })
             .catch(error => console.error('Error fetching products:', error));
     }, []);
+    
     
 
     const addToCart = (itemId) => {

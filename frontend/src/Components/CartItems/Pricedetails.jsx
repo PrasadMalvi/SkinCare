@@ -22,7 +22,7 @@ const Pricedetails = ({ allProducts, cartItems }) => {
       console.warn(`Product with ID ${productId} is missing or has no new_price`);
       return total;
     }
-    return total + (quantity * product.new_price);
+    return total + (quantity * product.old_price);
   }, 0);
 
   const itemCount = Object.values(cartItems).reduce((total, quantity) => total + quantity, 0);

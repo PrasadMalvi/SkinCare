@@ -1,0 +1,16 @@
+.home-cant{
+    height: 700px;
+    width: 100%;
+    background: linear-gradient(to right, #542c2c, #74545c);
+    padding-top: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero-img {
+    height: 700px; /* Match the parent's height */
+    width: 80%;  /* Match the parent's width */
+    background-size: cover;
+    background-image: url(../../Assets/skin-removebg-preview.png);
+    margin-right: 0;
+}

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import './CheckoutPage.css'
 
 const CheckoutPage = () => {
-  const navigate = useNavigate(); 
     const [fullName, setFullName] = useState('');
     const [addressLine1, setAddressLine1] = useState('');
     const [addressLine2, setAddressLine2] = useState('');
@@ -41,8 +39,11 @@ const CheckoutPage = () => {
             const data = await response.json();
             if (data.success) {
                 // Order placed successfully
-                console.log("Order placed successfully1");
-                navigate('/');
+                console.log("Order placed successfully1",data);
+                alert('Order placed successfully!');
+                setTimeout(() => {
+                    window.location.href = '/'; // Replace '/home' with the actual URL of your home page
+                }, 1000);
             } else {
                 // Error placing order
                 console.error("Error placing order:", data.error);
@@ -53,23 +54,17 @@ const CheckoutPage = () => {
     };
 
     return (
-        <div>
-            <h2>Checkout Page</h2>
-            <label>Full Name:</label>
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} /><br />
-            <label>Address Line 1:</label>
-            <input type="text" value={addressLine1} onChange={(e) => setAddressLine1(e.target.value)} /><br />
-            <label>Address Line 2:</label>
-            <input type="text" value={addressLine2} onChange={(e) => setAddressLine2(e.target.value)} /><br />
-            <label>City:</label>
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} /><br />
-            <label>State:</label>
-            <input type="text" value={state} onChange={(e) => setState(e.target.value)} /><br />
-            <label>Postal Code:</label>
-            <input type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} /><br />
-            <label>Country:</label>
-            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} /><br />
-            <button onClick={handlePlaceOrder}>Place Order</button>
+        <div className='checkout-container'>
+            <h2 className='checkout-title'>Checkout Page</h2>
+            <hr />
+            <input className='checkout-input' type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder='Full Name'/><br />
+            <input className='checkout-input' type="text" value={addressLine1} onChange={(e) => setAddressLine1(e.target.value)} placeholder='Address Line 1'/><br />
+            <input className='checkout-input' type="text" value={addressLine2} onChange={(e) => setAddressLine2(e.target.value)} placeholder='Address Line 2'/><br />
+            <input className='checkout-input' type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder='City'/><br />
+            <input className='checkout-input' type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder='State'/><br />
+            <input className='checkout-input' type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} placeholder='Postal Code'/><br />
+            <input className='checkout-input' type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder='Country'/><br />
+            <button className='checkout-button' onClick={handlePlaceOrder}>Place Order</button>
         </div>
     );
 };

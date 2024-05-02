@@ -1,52 +1,57 @@
+/* ProfilePage.css */
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
-  margin-bottom: 10px;
 }
 
 .profile-details {
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  height: 500px;
-  width: 800px; /* Increased width to accommodate the layout */
+  width: 80%;
+  max-width: 1000px; /* Added max-width for better responsiveness */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .profile-pic {
-  width: 150px; /* Increased width for larger profile picture */
-  height: 150px; /* Increased height for larger profile picture */
-  border-radius: 50%;
-  margin-right: 90px;
-  margin-top: 50px;
-  border: 1px solid black;
+  width: 350px;
+  height: 405px;
+  padding-right: 20px;
+  margin-right: 40px; /* Adjusted margin */
+  margin-top: 0px; /* Adjusted margin */
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 .profile-pic img {
-  width: 100%; /* Ensure the image fills its container */
-  height: 100%; /* Ensure the image fills its container */
-  object-fit: cover; /* Ensure the image covers the entire container */
-  margin-left: -0.5px;
-
+  margin-left: 80px;
+  margin-top: 50px;
+  width: 50%;
+  height: 45%;
+  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 50%;
 }
 
-.profile-thumnail-img {
+.profile-btn1{
+  margin-left: 20px;
+}
+.profile-thumbnail-img {
   width: 45px;
   height: 45px;
   border-radius: 10px;
   object-fit: contain;
+  
 }
 
 .profile-info {
   display: flex;
   flex-direction: column;
-  width: 400px; /* Adjusted width for profile info */
+  width: 60%; /* Adjusted width */
 }
 
 .input-fields {
@@ -56,28 +61,93 @@
   border-radius: 25px;
   font-size: 16px;
   padding-left: 20px;
-  width: 60%;
+  width: 65%; /* Adjusted width */
 }
 
 .profile-btn {
-  width: 68%;
+  width: 70%; /* Adjusted width */
   margin-top: 10px;
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
-  background-color: #007bff;
+  background-color: #74545c;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
 }
+.delete-btn{
+  background-color: red;
+}
 
 .order-history {
   margin-top: 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 200px;
-  min-width: 800px; /* Adjusted width for order history */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 50%;
+  max-width: 1000px; /* Added max-width for better responsiveness */
+  padding: 20px;
+  margin-bottom: 50px;
 }
 
 .order-history h2 {
-  padding-top: 40px;
+  padding-top: 20px;
+  margin-bottom: 20px;
 }
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  
+}
+
+.order-details {
+  flex-grow: 1;
+}
+
+.order-left {
+  display: flex;
+  align-items: center;
+}
+
+.order-right {
+  margin-left: 50px;
+}
+
+.order-image {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.order-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-details p {
+  margin: 5px 0;
+  white-space: nowrap;
+}
+
+.order-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-details ul li {
+  margin-left: 20px;
+}
+
+
