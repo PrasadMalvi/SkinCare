@@ -3,69 +3,63 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 50px; /* Adjusted margin for better spacing */
 }
 
 .profile-details {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap; /* Allow items to wrap to new line */
   justify-content: center;
-  width: 80%;
-  max-width: 1000px; /* Added max-width for better responsiveness */
+  width: 90%; /* Adjusted width */
+  max-width: 1000px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
 
 .profile-pic {
-  width: 350px;
-  height: 405px;
-  padding-right: 20px;
-  margin-right: 40px; /* Adjusted margin */
-  margin-top: 0px; /* Adjusted margin */
+  width: 250px; /* Adjusted width */
+  height: 250px; /* Adjusted height */
+  padding-right: 10px; /* Adjusted padding */
+  margin-right: 0; /* Removed margin */
+  margin-bottom: 20px; /* Adjusted margin for better spacing */
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 .profile-pic img {
-  margin-left: 80px;
-  margin-top: 50px;
-  width: 50%;
-  height: 45%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border: 1px solid black;
   border-radius: 50%;
 }
 
-.profile-btn1{
-  margin-left: 20px;
-}
-.profile-thumbnail-img {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
-  object-fit: contain;
-  
-}
-
 .profile-info {
   display: flex;
   flex-direction: column;
-  width: 60%; /* Adjusted width */
+  width: 100%;
+  margin-left: 330px;
+}
+
+.profile-info h1{
+  margin-left: 60px;
+  font-size: 45px;
 }
 
 .input-fields {
+  text-align: center;
   margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 25px;
   font-size: 16px;
   padding-left: 20px;
-  width: 65%; /* Adjusted width */
+  width: 50%; /* Adjusted width */
 }
 
 .profile-btn {
-  width: 70%; /* Adjusted width */
+  width: 55%; /* Adjusted width */
   margin-top: 10px;
   padding: 10px 20px;
   border: none;
@@ -75,15 +69,16 @@
   cursor: pointer;
   font-size: 16px;
 }
-.delete-btn{
+
+.delete-btn {
   background-color: red;
 }
 
 .order-history {
   margin-top: 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  width: 50%;
-  max-width: 1000px; /* Added max-width for better responsiveness */
+  width: 90%; /* Adjusted width */
+  max-width: 1000px;
   padding: 20px;
   margin-bottom: 50px;
 }
@@ -105,7 +100,7 @@
   border-radius: 10px;
   width: 100%;
   display: flex;
-  
+  flex-wrap: wrap; /* Allow items to wrap to new line */
 }
 
 .order-details {
@@ -118,12 +113,12 @@
 }
 
 .order-right {
-  margin-left: 50px;
+  margin-left: 20px; /* Adjusted margin for better spacing */
 }
 
 .order-image {
-  width: 250px;
-  height: 250px;
+  width: 200px; /* Adjusted width */
+  height: 200px; /* Adjusted height */
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -150,4 +145,36 @@
   margin-left: 20px;
 }
 
-
+/* Media query for responsive adjustments */
+@media screen and (max-width: 600px) {
+  .profile-details {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-info{
+    margin-left: -0px;
+  }
+  
+  .profile-pic {
+    width: 150px; /* Adjusted width */
+    height: 150px; /* Adjusted height */
+    margin-bottom: 10px; /* Adjusted margin for better spacing */
+  }
+  
+  .input-fields {
+    width: 90%; /* Adjusted width */
+  }
+  
+  .profile-btn {
+    width: 100%; /* Adjusted width */
+  }
+  
+  .order-history {
+    width: 90%; /* Adjusted width */
+  }
+  
+  .order-image {
+    width: 150px; /* Adjusted width */
+    height: 150px; /* Adjusted height */
+  }
+}

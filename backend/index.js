@@ -429,12 +429,13 @@ app.post('/placeorder', fetchUser, async (req, res) => {
 
         // Retrieve user's cart data
         const userData = await Users.findOne({ _id: req.user.id });
-        const orderedProducts = Object.entries(userData.cartData)
-            .filter(([productId, quantity]) => quantity === 1)
-            .reduce((acc, [productId]) => {
-                acc[productId] = 1; // Set quantity to 1 for each product
-                return acc;
-            }, {});
+const orderedProducts = Object.entries(userData.cartData)
+    .filter(([productId, quantity]) => quantity > 0)
+    .reduce((acc, [productId, quantity]) => {
+        acc[productId] = quantity; // Retain the original quantity
+        return acc;
+    }, {});
+
         // Convert Object.entries to Array
         
 

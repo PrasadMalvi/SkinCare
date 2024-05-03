@@ -3,12 +3,22 @@ import './ProductDisplay.css';
 import star_icon from '../Assets/star-icon.png';
 import star_dull_icon from '../Assets/star-dull-icon.png';
 import { Context } from '../../Context/Context';
+import {useNavigate} from 'react-router-dom'
 
 const ProductDisplay = (props) => {
+    const navigate = useNavigate();
     const { product } = props;
-    const {addToCart} = useContext(Context);
+    const { addToCart } = useContext(Context);
 
-   
+    // Function to handle "Buy Now" button click
+    const handleBuyNow = () => {
+        // Here you can perform actions such as adding the product to the cart and then redirecting to the checkout page
+        addToCart(product.id);
+        // Redirect to the checkout page or any other desired page
+        // For example:
+        navigate('/checkout');
+    };
+
     return (
         <div className='productdisplay-container'>
             <div className="productdisplay-img">
@@ -28,22 +38,14 @@ const ProductDisplay = (props) => {
                     <div className="productdisplay-right-price-old">₹{product.old_price}</div>
                     <div className="productdisplay-right-price-new">₹{product.new_price}</div>
                 </div>
-{/*                 <div className="productdisplay-right-quantity">Quantity: 
-                    <div className="product-quant">
-                    <button onClick={handleDecrement}>-</button>
-                    <span>{quantity}</span>
-                    <button onClick={handleIncrement}>+</button>
-                    </div>
-                </div> */}
                 <div className="cart-buttons">
-                <button onClick={() =>{addToCart(product.id)}} className='cart-button'>Add To Cart</button>
-                <button type="button" className='buy-button'>Buy Now</button>
+                    <button onClick={() => addToCart(product.id)} className='cart-button'>Add To Cart</button>
+                    <button onClick={handleBuyNow} className='buy-button'>Buy Now</button>
                 </div>
                 <div className="productdisplay-right-description">
-                {product.description}
-                {product.description}
+                    {product.description}
+                    {product.description}
                 </div>
-                
             </div>
         </div>
     );

@@ -292,7 +292,7 @@ const ProfilePage = () => {
                                             <ul>
                                                 <li><strong>Product Name:</strong> {product.name}</li>
                                                 <li><strong>Quantity:</strong> {product.quantity}</li>
-                                                <li><strong>Price:</strong> {product.new_price}</li>
+                                                <li><strong>Total Price:</strong> {product.new_price * product.quantity}</li>
                                             </ul>
                                         </div>
 

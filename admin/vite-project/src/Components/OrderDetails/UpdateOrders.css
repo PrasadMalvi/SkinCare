@@ -21,7 +21,8 @@
     border: 1px solid #ccc;
     padding: 20px;
 }
-.product-status-update{
+
+.product-status-update {
     margin-left: 120px;
 }
 
@@ -57,4 +58,35 @@
     width: 200px;
     border-radius: 25px;
     margin-top: 10px;
+}
+
+/* Media query for responsive adjustments */
+@media screen and (max-width: 600px) {
+    /* Adjust margin for product status update */
+    .product-status-update {
+        margin-left: 0;
+        margin-top: 10px; /* Add margin at the top for better spacing */
+    }
+    
+    /* Adjust product image size */
+    .admin-product-imgs {
+        width: 80px;
+        height: 80px;
+        margin-right: 10px;
+    }
+    
+    /* Adjust product name font size */
+    .admin-product-name {
+        font-size: 16px;
+    }
+    
+    /* Adjust product price font size */
+    .admin-product-price {
+        font-size: 14px;
+    }
+    
+    /* Adjust select dropdown width */
+    .status-select {
+        width: 150px;
+    }
 }

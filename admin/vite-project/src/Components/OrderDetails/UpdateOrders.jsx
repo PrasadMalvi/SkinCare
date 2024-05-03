@@ -68,7 +68,7 @@ const UpdateOrders = () => {
                                     <p className='admin-product-id'>Product ID: {product.productId}</p>
                                     <p className='admin-product-qty'>Quantity: {product.quantity}</p>
                                     
-                                    <p className='admin-product-prices'>Price: {product.new_price}</p>
+                                    <p className='admin-product-prices'>Total Price: {product.new_price * product.quantity}</p>
                                     </div>
                                 </div>
                             ))

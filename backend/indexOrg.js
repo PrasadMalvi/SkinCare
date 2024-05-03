@@ -23,21 +23,25 @@ app.get("/", (req, res) => {
 const profileImageStorage = multer.diskStorage({
     destination: './upload/profile-pics',
     filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+      cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+    },
+  });
+  
+  const profileImageUpload = multer({ storage: profileImageStorage });
+  
+  // Creating upload Endpoint for Profile Pictures
+  app.use('/profile-pics', express.static('upload/profile-pics'));
+  
+  app.post("/upload/profile-pics", profileImageUpload.single('profilePicture'), (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ success: 0, message: 'No file uploaded' });
     }
-});
-
-const profileImageUpload = multer({ storage: profileImageStorage });
-
-// Creating upload Endpoint for Profile Pictures
-app.use('/profile-pics', express.static('upload/profile-pics'));
-
-app.post("/upload/profile-pics", profileImageUpload.single('profilePicture'), (req, res) => {
+  
     res.json({
-        success: 1,
-        image_url: `http://localhost:${port}/profile-pics/${req.file.filename}`
+      success: 1,
+      image_url: `http://localhost:${port}/profile-pics/${req.file.filename}`,
     });
-});
+  });
 
 // Image Storage Engine
 const storage = multer.diskStorage({
@@ -158,6 +162,21 @@ const Users = mongoose.model('Users', {
     password: {
         type: String,
     },
+    profileImage: {
+        type: String, // Assuming profile image will be stored as a URL
+    },
+    dob: {
+        type: Date, // Date of birth
+    },
+    mname: {
+        type: String, // Middle name
+    },
+    lname: {
+        type: String, // Last name
+    },
+    number: {
+        type: String, // Phone number
+    },
     cartData: {
         type: Object,
     },
@@ -166,8 +185,6 @@ const Users = mongoose.model('Users', {
         default: Date.now,
     }
 });
-
-// Rest of the code remains the same...
 
 
 // Creating Endpoint for Registering Users
@@ -182,11 +199,8 @@ app.post('/signup', async (req, res) => {
         // Hash the password before saving it to the database
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        // Create cart data for the user
+        // Create cart data for the user with only the product that has been added
         const cart = {};
-        for (let i = 0; i < 300; i++) {
-            cart[i] = 0;
-        }
 
         // Create a new user instance
         const newUser = new Users({
@@ -257,6 +271,43 @@ const fetchUser = async (req, res, next) => {
     }
 };
 
+// Endpoint to retrieve user profile data
+app.get('/profile', fetchUser, async (req, res) => {
+    try {
+        // Fetch user profile data based on the user ID
+        const user = await Users.findById(req.user.id).select('name email profileImage dob mname lname number');
+        res.json({ success: true, user });
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).json({ success: false, error: "Failed to fetch user profile" });
+    }
+});
+
+// Endpoint to update user profile data
+app.post('/profile/update', fetchUser, async (req, res) => {
+    try {
+        // Update user profile data based on the request body
+        const updatedUser = await Users.findByIdAndUpdate(req.user.id, req.body, { new: true });
+        res.json({ success: true, user: updatedUser });
+    } catch (error) {
+        console.error("Error updating user profile:", error);
+        res.status(500).json({ success: false, error: "Failed to update user profile" });
+    }
+});
+
+// Endpoint to delete user account
+app.delete('/profile/delete', fetchUser, async (req, res) => {
+    try {
+        // Delete user account based on the user ID
+        await Users.findByIdAndDelete(req.user.id);
+        res.json({ success: true, message: "User account deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting user account:", error);
+        res.status(500).json({ success: false, error: "Failed to delete user account" });
+    }
+});
+
+
 app.post('/addtocart', fetchUser, async (req, res) => {
     try {
         // Retrieve user's cart data
@@ -314,7 +365,7 @@ app.post('/getdata',fetchUser,async(req,res)=>{
 })
 
 // Schema for storing order details
-const OrderDetails = mongoose.model("OrderDetails", {
+const MyOrder = mongoose.model("MyOrder", {
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -351,30 +402,21 @@ const OrderDetails = mongoose.model("OrderDetails", {
         enum: ["cash"], // Only allow cash payment method
         required: true,
     },
-    orderedProducts: [{
-        productId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Product' // Reference to the Product model
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        quantity: {
-            type: Number,
-            required: true,
-        },
-        price: {
-            type: Number,
-            required: true,
-        }
-    }],
+    orderedProducts: {
+        type: Object,
+    },
+    status: { // New field for order status
+        type: String,
+        enum: ["pending", "shipped", "delivered"], // Define possible order statuses
+        default: "pending", // Default status is pending
+    },
     createdAt: {
         type: Date,
         default: Date.now,
     }
 });
+
+// Endpoint for placing orders
 // Endpoint for placing orders
 app.post('/placeorder', fetchUser, async (req, res) => {
     try {
@@ -387,34 +429,17 @@ app.post('/placeorder', fetchUser, async (req, res) => {
 
         // Retrieve user's cart data
         const userData = await Users.findOne({ _id: req.user.id });
-
-        // Initialize an array to store ordered product details
-        let orderedProducts = [];
-
-        // Loop through each item in the user's cart
-        for (const [productId, quantity] of Object.entries(userData.cartData)) {
-            try {
-                // Find the product details by ID
-                const product = await Product.findById(productId);
-
-                // If the product is found, add its details to the ordered products array
-                if (product) {
-                    orderedProducts.push({
-                        productId: product._id, // Use ObjectId type
-                        name: product.name,
-                        quantity: quantity,
-                        price: product.new_price // Assuming new_price is the price to be used in the order
-                    });
-                } else {
-                    console.error(`Product with ID ${productId} not found`);
-                }
-            } catch (error) {
-                console.error(`Error fetching product with ID ${productId}:`, error);
-            }
-        }
+        const orderedProducts = Object.entries(userData.cartData)
+            .filter(([productId, quantity]) => quantity > 0)
+            .reduce((acc, [productId]) => {
+                acc[productId] > 0; // Set quantity to 1 for each product
+                return acc;
+            }, {});
+        // Convert Object.entries to Array
+        
 
         // Create new order instance
-        const order = new OrderDetails({
+        const order = new MyOrder({
             userId: req.user.id,
             fullName,
             addressLine1,
@@ -424,8 +449,7 @@ app.post('/placeorder', fetchUser, async (req, res) => {
             postalCode,
             country,
             paymentMethod: "cash", // Hardcoded to cash payment method
-            orderedProducts ,
-             // Assign orderedProducts to the correct field
+            orderedProducts,
             createdAt: new Date() // Adding the current date to the order
         });
 
@@ -442,6 +466,162 @@ app.post('/placeorder', fetchUser, async (req, res) => {
     }
 });
 
+// Endpoint to fetch order details for the logged-in user
+app.get('/orderhistory', fetchUser, async (req, res) => {
+    try {
+        // Fetch order history for the logged-in user
+        const orders = await MyOrder.find({ userId: req.user.id }).sort({ createdAt: -1 });
+
+        // Filter out orders with non-empty arrays of ordered products
+        const filteredOrders = orders.filter(order => Object.keys(order.orderedProducts).length > 0);
+        // Send filtered order history as a response
+        res.json({ success: true, orders: filteredOrders });
+    } catch (error) {
+        console.error("Error fetching order history:", error);
+        res.status(500).json({ success: false, error: "Failed to fetch order history" });
+    }
+});
+
+// Endpoint for updating order status by admin
+app.post('/updateorderstatus', async (req, res) => {
+    try {
+        const { orderId, status } = req.body;
+
+        // Update the status of the specified order
+        await MyOrder.findOneAndUpdate({ _id: orderId }, { status });
+
+        // Fetch the updated order to send back in the response
+        const updatedOrder = await MyOrder.findOne({ _id: orderId });
+
+        // If the order is found and updated successfully, send a success response
+        if (updatedOrder) {
+            res.json({ success: true, message: "Order status updated successfully", order: updatedOrder });
+        } else {
+            res.status(404).json({ success: false, error: "Order not found" });
+        }
+    } catch (error) {
+        console.error("Error updating order status:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+ // Endpoint to fetch order details including product details
+app.get('/orderdetails', fetchUser, async (req, res) => {
+    try {
+        // Fetch order details for the logged-in user
+        const orders = await MyOrder.find({ userId: req.user.id }).sort({ createdAt: -1 });
+
+        // Array to store detailed order information
+        const detailedOrders = [];
+
+        // Iterate through each order
+        for (const order of orders) {
+            // Check if orderedProducts is defined and not null
+            if (order.orderedProducts) {
+                // Object to store detailed order information
+                const detailedOrder = {
+                    orderId: order._id,
+                    fullName: order.fullName,
+                    addressLine1: order.addressLine1,
+                    addressLine2: order.addressLine2,
+                    city: order.city,
+                    state: order.state,
+                    postalCode: order.postalCode,
+                    country: order.country,
+                    paymentMethod: order.paymentMethod,
+                    status: order.status,
+                    createdAt: order.createdAt,
+                    orderedProducts: []
+                };
+
+                // Fetch product details for each ordered product
+                for (const productId of Object.keys(order.orderedProducts)) {
+                    const product = await Product.findOne({ id: productId });
+
+                    // If product found, add its details to the orderedProducts array
+                    if (product) {
+                        detailedOrder.orderedProducts.push({
+                            productId: product.id,
+                            name: product.name,
+                            image: product.image,
+                            category: product.category,
+                            new_price: product.new_price,
+                            old_price: product.old_price,
+                            quantity: order.orderedProducts[productId]
+                        });
+                    }
+                }
+
+                // Push detailed order information to the detailedOrders array
+                detailedOrders.push(detailedOrder);
+            }
+        }
+
+        // Send the detailed order information as a response
+        res.json({ success: true, orders: detailedOrders });
+    } catch (error) {
+        console.error("Error fetching order details:", error);
+        res.status(500).json({ success: false, error: "Failed to fetch order details" });
+    }
+});
+
+ // Endpoint to fetch order details including product details
+// Endpoint to fetch order details for admin
+app.get('/adminorderdetails', async (req, res) => {
+    try {
+        // Fetch all orders
+        const orders = await MyOrder.find({}).sort({ createdAt: -1 });
+        const detailedOrders = [];
+        // Map the orders to include orderId instead of _id
+        for (const order of orders) {
+            // Check if orderedProducts is defined and not null
+            if (order.orderedProducts) {
+                // Object to store detailed order information
+                const detailedOrder = {
+                    orderId: order._id,
+                    fullName: order.fullName,
+                    addressLine1: order.addressLine1,
+                    addressLine2: order.addressLine2,
+                    city: order.city,
+                    state: order.state,
+                    postalCode: order.postalCode,
+                    country: order.country,
+                    paymentMethod: order.paymentMethod,
+                    status: order.status,
+                    createdAt: order.createdAt,
+                    orderedProducts: []
+                };
+
+                // Fetch product details for each ordered product
+                for (const productId of Object.keys(order.orderedProducts)) {
+                    const product = await Product.findOne({ id: productId });
+
+                    // If product found, add its details to the orderedProducts array
+                    if (product) {
+                        detailedOrder.orderedProducts.push({
+                            productId: product.id,
+                            name: product.name,
+                            image: product.image,
+                            category: product.category,
+                            new_price: product.new_price,
+                            old_price: product.old_price,
+                            quantity: order.orderedProducts[productId]
+                        });
+                    }
+                }
+
+                // Push detailed order information to the detailedOrders array
+                detailedOrders.push(detailedOrder);
+            }
+        }
+        // Send the order details with orderId included as a response
+        res.json({ success: true, orders: detailedOrders });
+    } catch (error) {
+        console.error("Error fetching order details:", error);
+        res.status(500).json({ success: false, error: "Failed to fetch order details" });
+    }
+});
 
 
 

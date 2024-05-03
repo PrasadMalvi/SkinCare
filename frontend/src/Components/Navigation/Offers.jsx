@@ -1,7 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Offers.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const Offers = () => {
+const Offers = ({ allProducts }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  // Function to handle search query change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Filter products based on search query
+  const filteredProducts = searchQuery 
+    ? allProducts.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  // Function to handle selecting a product and navigate to its details
+  const handleProductSelect = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
+  // Close dropdown when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className='offer-sec'>
       <link
@@ -13,7 +50,14 @@ const Offers = () => {
       />
 
       <div className="nav-search">
-        <span><i className="fa-solid fa-magnifying-glass"></i></span><input placeholder="What are you looking for?" className="search-input" />
+        <span><i className="fa-solid fa-magnifying-glass"></i></span>
+        <input 
+          placeholder="What are you looking for?" 
+          className="search-input" 
+          value={searchQuery}
+          onChange={handleSearchChange}
+          onFocus={() => setIsDropdownOpen(true)} // Open dropdown on focus
+        />
       </div>
 
       <p>15% sitewide! Use promo code LOVE15</p>
@@ -26,6 +70,19 @@ const Offers = () => {
           <i className="fab fa-instagram"></i>
         </a>
       </div>
+
+      {/* Conditionally render dropdown with filtered products */}
+      {isDropdownOpen && (
+        <div ref={dropdownRef} className='dropdown'>
+          {filteredProducts.map((product, index) => (
+            <div className='searched-products' key={index} onClick={() => handleProductSelect(product.id)}>
+              <img src={product.image} alt={product.name} />
+              <div className='searched-products-h3' >{product.name}</div>
+              {/* You can add more product details here */}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

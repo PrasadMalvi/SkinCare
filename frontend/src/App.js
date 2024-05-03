@@ -20,11 +20,31 @@ import banner_new from './Components/Assets/new.webp';
 import LoginSignup from './Pages/LoginSignup';
 import CheckoutPage from './Pages/CheckoutPage';
 import ProfilePage from './Pages/ProfilePage';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  const fetchAllProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/allproducts');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setAllProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
   return (
     <Router>
-      <Offers />
+      <Offers allProducts={allProducts}/>
       <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
