@@ -3,15 +3,10 @@
     width: 100%;
     margin-top: 100px;
 }
-.shopcategory-banner {
-    display: block;
-    margin: 0 auto; /* Center horizontally */
-    width: 100%; /* Full width */
-    height: auto; /* Auto height */
-    max-width: 100%; /* Ensure maximum width */
-    margin-bottom: 30px; /* Adjust bottom margin */
-  }
-  
+
+.shopcategory .shopcategory-banner{
+    width: 90%;
+}
 .shopcategory-sort{
     padding: 10px 20px;
     border-radius: 40px;
@@ -19,6 +14,7 @@
     width: 4.3%;
     margin-left: 1220px;
     margin-top: -35px;
+    
 }
 .shopcategory p{
     margin-right: 942px;
@@ -29,6 +25,9 @@
     margin: 0px 170px;
     justify-content: space-between;
     align-items: center;
+
+    width: 90%;
+    margin-left: 80px;
 }
 
 .shopcategory-products {

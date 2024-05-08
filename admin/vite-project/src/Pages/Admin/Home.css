@@ -8,9 +8,10 @@
 }
 
 .hero-img {
-    height: 700px; /* Match the parent's height */
+    height: 769px; /* Match the parent's height */
     width: 80%;  /* Match the parent's width */
     background-size: cover;
     background-image: url(../../Assets/skin-removebg-preview.png);
-    margin-right: 0;
+    margin-left: 250px;
+    margin-top: -70px;
 }

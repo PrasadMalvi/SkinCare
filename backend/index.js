@@ -244,6 +244,36 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Endpoint for password reset
+app.post('/resetpassword', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check if the user with the provided email exists
+        const user = await Users.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ success: false, error: "User with this email does not exist" });
+        }
+
+        // Generate a unique token for password reset
+        const token = jwt.sign({ userId: user._id }, 'secret_ecom', { expiresIn: '1h' });
+
+        // Update the user's password with the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+        await user.save();
+
+        // Here you can send an email to the user with a link containing the token for password reset
+        // For the sake of this example, we'll just return the token in the response
+        res.json({ success: true, message: "Password reset successfully", token });
+    } catch (error) {
+        console.error("Error in password reset:", error);
+        res.status(500).json({ success: false, error: "Internal server error" });
+    }
+});
+
+
+
 //creating endpoitns for new collection data
 app.get('/newcollection',async(req,res)=>{
     let products = await Product.find({});

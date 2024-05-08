@@ -10,12 +10,6 @@ const  ShopCategory = (props) => {
   return (  
     <div className='shopcategory'>
         <img className='shopcategory-banner' src={props.banner} alt="" />
-        <p className='show'>
-            <span>Showing 1 - 12</span> out of 49
-        </p>
-        <div className='shopcategory-sort'>
-            Sort by <i className="fa-solid fa-caret-down"></i>
-        </div>
         <div className="shopcategory-indexSort">
             <div className="shopcategory-products">
                 {allProducts.map((item, i) =>{

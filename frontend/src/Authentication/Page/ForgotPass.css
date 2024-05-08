@@ -1,0 +1,97 @@
+.forgot-pass-container {
+    margin-top: 100px; /* Adjusted margin for better visibility on mobile */
+    margin-bottom: 50px; /* Adjusted margin for better visibility on mobile */
+    max-width: 95%; /* Adjusted maximum width for better fit on smaller screens */
+    margin-left: auto; /* Centering the form horizontally */
+    margin-right: auto; /* Centering the form horizontally */
+    width: 30%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0.5, 0.5, 0.5, 0.5);
+}
+
+.forgot-pass-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.forgot-pass-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.forgot-pass-form label {
+    margin-bottom: 10px;
+}
+
+.forgot-pass-form input[type="email"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 85%;
+}
+
+.passent {
+    height: 35px;
+    width: 85%; /* Adjusted width to fit container */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.forgot-pass-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #755757;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+}
+
+.forgot-pass-form button[type="submit"]:hover {
+    background-color: #6a4f4f;
+}
+
+.forgot-pass-message {
+    margin-top: 20px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Media query for mobile view */
+@media only screen and (max-width: 600px) {
+    .forgot-pass-container {
+        margin-top: 100px; /* Adjusted margin for better visibility on mobile */
+        margin-bottom: 20px; /* Adjusted margin for better visibility on mobile */
+        width: 80%;
+    }
+    
+    .forgot-pass-title {
+        font-size: 20px; /* Adjusted font size for better readability */
+    }
+
+    .forgot-pass-form input[type="email"] {
+        font-size: 14px; /* Adjusted font size for better readability */
+    }
+
+    .passent {
+        height: 35px; /* Adjusted height for better fit */
+        width: 86%;
+    }
+
+    .forgot-pass-form button[type="submit"] {
+        font-size: 16px; /* Adjusted font size for better readability */
+        width: 93%;
+    }
+
+    .forgot-pass-message {
+        font-size: 14px; /* Adjusted font size for better readability */
+    }
+}

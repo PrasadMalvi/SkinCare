@@ -89,3 +89,10 @@
 .searched-products:hover {
   background-color: #684444;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .dropdown{
+    width: 70%;
+  }
+}

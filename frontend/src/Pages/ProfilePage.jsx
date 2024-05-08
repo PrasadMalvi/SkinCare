@@ -86,6 +86,7 @@ const ProfilePage = () => {
   
       if (response.ok && data.success) {
         setUserInfo({ ...userInfo, profileImage: data.image_url });
+        alert("Please Cick Save to save the picure");
       } else {
         throw new Error(data.message || 'Failed to upload profile picture');
       }

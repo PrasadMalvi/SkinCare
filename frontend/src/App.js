@@ -17,11 +17,12 @@ import banner_eye from './Components/Assets/eye.webp'
 import banner_lips from './Components/Assets/lips.webp'
 import banner_shopall from './Components/Assets/shopall.webp'
 import banner_new from './Components/Assets/new.webp';
-import LoginSignup from './Pages/LoginSignup';
+import LoginSignup from './Authentication/Page/LoginSignup';
 import CheckoutPage from './Pages/CheckoutPage';
 import ProfilePage from './Pages/ProfilePage';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import ForgotPass from './Authentication/Page/ForgotPass';
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -60,6 +61,7 @@ function App() {
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/profilepage" element={<ProfilePage />} />
+        <Route path="/forgotpass" element={<ForgotPass />} />
 
 
       </Routes>

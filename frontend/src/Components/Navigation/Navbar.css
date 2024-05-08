@@ -1,114 +1,180 @@
-  .navbar {
-      background-color: #684444;
-      height: 70px;
-      width: 100%;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      position: fixed;
-      transition: background-color 0.3s ease-in-out;
-      z-index: 2;
-    }
-    a{
-      text-decoration: none;
-      color: white;
-      text-align: center;
-    }
-    .login{
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-    }
-    .logged-in{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-    .login h3 {
-      cursor: pointer; /* Add pointer cursor to logout button */
-      margin-top: 20px;
-    }
-    .user-login{
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      display: flex;
-    }
-    .user-login h3{
-      margin-top: 20px;
-    }
-  img
-  {
-    height: 30px;
-    width: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  .nav-cart{
-    height: 35px;
-    width: 35px;
-    margin-left: 10px;
-  }
-    .scrolled {
-      top: 0;
-      background-color: #684444; /* Adjust the background color for the scrolled state */
-      animation: fadeInDown 0.3s ease-in-out; /* Optional: add a fade-in animation */
-    }
-    
-    .cart-count {
-      position: absolute;
-      top: 30px;
-      right: 143px; /* Adjusted for logged out state */
-      background-color: transparent;
-      color: white;
-      font-size: 12px;
-      width: 13px;
-      height: 15px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* Adjust position for logged in state */
-   .cart-count {
-      right: 140px;
-    }
+/* Base styles for navbar */
+.navbar {
+  background-color: #684444;
+  height: 70px;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  transition: background-color 0.3s ease-in-out;
+  z-index: 2;
+}
 
-    .cart-count2{
-      margin-right: 16px;
-    }
-    
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .nav-name, .nav-list {
-      display: flex;
-      align-items: center;
-    }
-    
-    .nav-name {
-      padding-left: 20px;
-      font-family: Brush Script MT;
-      font-size: 60px;
-    }
-    
-    .nav-list {
-      list-style: none;
-    }
-    
-    .nav-list li, .nav-list a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: white;
-    }
-    
+a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.login {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.logged-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login h3 {
+  cursor: pointer; /* Add pointer cursor to logout button */
+  margin-top: 20px;
+}
+
+.user-login {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.user-login h3 {
+  margin-top: 20px;
+}
+
+img {
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.nav-cart {
+  height: 35px;
+  width: 35px;
+  margin-left: 10px;
+  position: relative; /* Ensure positioning context for child elements */
+}
+
+.scrolled {
+  top: 0;
+  background-color: #684444; /* Adjust the background color for the scrolled state */
+  animation: fadeInDown 0.3s ease-in-out; /* Optional: add a fade-in animation */
+}
+
+.nav-cartcount {
+  margin-top: -29px;
+  font-size: 15px;
+}
+
+
+
+@keyframes fadeInDown {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.nav-name, .nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.nav-name {
+  padding-left: 20px;
+  font-family: "Brush Script MT", cursive; /* Adjusted font family */
+  font-size: 40px; /* Adjusted font size */
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.nav-list li,
+.nav-list a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.dropdownmenu{
+  display: none;
+}
+
+/* Media query for mobile view */
+@media only screen and (max-width: 600px) {
+  .navbar {
+    justify-content: center; /* Center items */
+    padding: 0 20px; /* Add padding */
+  }
+
+  .nav-name {
+    font-size: 30px; /* Adjust font size */
+    margin-right: 50px;
+  }
+
+  .nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    top: 50px; /* Adjust based on navbar height */
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Adjust the width as needed */
+    background-color: #684444; /* Background color for the sidebar */
+    z-index: 1; /* Ensure the sidebar is above other content */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .nav-list.open {
+    transform: translateX(0%);
+  }
+
+  .nav-list li {
+    margin: 15px 0;
+  }
+
+  .nav-list a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .nav-list a:hover {
+    color: #684444; /* Change color on hover */
+  }
+
+  .dropdownmenu {
+    display: block; /* Show the dropdown image */
+    position: absolute; /* Position the dropdown image absolutely */
+    top: 10px;
+    right: 20px;
+    cursor: pointer; /* Add cursor pointer */
+    z-index: 2; /* Ensure the dropdown image is above other content */
+    margin-right: 390px;
+    margin-top: 7px;
+  }
+
+  .navbar.scrolled .dropdownmenu {
+    top: 10px; /* Adjust top position for scrolled state */
+  }
+}
+
+

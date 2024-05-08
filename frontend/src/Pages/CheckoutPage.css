@@ -44,3 +44,13 @@
 .checkout-button:hover {
   background-color: #74545c;
 }
+
+@media only screen and (max-width: 600px) {
+  .checkout-container{
+    width: 90%;
+    margin-left: 20px;
+  }
+  .checkout-button{
+    width: 90%;
+  }
+}

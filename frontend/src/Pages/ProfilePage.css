@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px; /* Adjusted margin for better spacing */
+  margin-top: 100px; /* Adjusted margin for better spacing */
 }
 
 .profile-details {
@@ -12,7 +12,7 @@
   justify-content: center;
   width: 90%; /* Adjusted width */
   max-width: 1000px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 
@@ -21,20 +21,24 @@
   height: 250px; /* Adjusted height */
   padding-right: 10px; /* Adjusted padding */
   margin-right: 0; /* Removed margin */
-  margin-bottom: 20px; /* Adjusted margin for better spacing */
+  margin-bottom: -20px; /* Adjusted margin for better spacing */
+  margin-left: 80px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 .profile-pic img {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
   object-fit: cover;
   border: 1px solid black;
   border-radius: 50%;
 }
 
+.profile-btn1{
+  margin-left: 20px;
+}
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -69,7 +73,6 @@
   cursor: pointer;
   font-size: 16px;
 }
-
 .delete-btn {
   background-color: red;
 }
