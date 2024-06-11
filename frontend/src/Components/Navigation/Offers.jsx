@@ -60,7 +60,7 @@ const Offers = ({ allProducts }) => {
         />
       </div>
 
-      <p>15% sitewide! Use promo code LOVE15</p>
+      <p className='ofrcode'>15% sitewide! Use promo code LOVE15</p>
   
       <div className="social-icons">
         <a href="https://www.facebook.com/prasad.malvi.50/" target="_blank" rel="noopener noreferrer">

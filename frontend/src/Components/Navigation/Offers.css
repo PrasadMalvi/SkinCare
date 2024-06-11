@@ -29,6 +29,7 @@
 
 .nav-search {
   margin-top: 20px;
+  margin-left: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,6 +42,9 @@
   margin-top: 20px;
   display: flex;
   justify-content: center; /* Center align social icons */
+  margin-right: 50px;
+  margin-bottom: 15px;
+
 }
 
 .social-icons a {
@@ -53,6 +57,10 @@
 
 .social-icons a:hover {
   transform: scale(1.2); /* Adjust the scale factor for hover effect */
+}
+
+.ofrcode{
+  margin-right: 150px;
 }
 
 /* Dropdown styles */
@@ -95,4 +103,15 @@
   .dropdown{
     width: 70%;
   }
+  .nav-search{
+    margin-left: 10px;
+  }
+  .social-icons{
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+  .ofrcode{
+    margin-right: 10px;
+  }
+  
 }

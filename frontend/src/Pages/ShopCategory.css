@@ -62,4 +62,7 @@
     .shopcategory-products .item-box {
         flex: 0 0 calc(50% - 20px); /* Adjust width for responsiveness */
     }
+    .shopcategory .shopcategory-banner{
+        height: 100%;
+    }
 }
