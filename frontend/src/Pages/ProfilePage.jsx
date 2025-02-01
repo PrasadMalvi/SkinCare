@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './ProfilePage.css';
 import upload_area from '../Components/Assets/cloud-computing.png';
 
+
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [selectedProductId, setSelectedProductId] = useState(null);
